@@ -1,0 +1,9 @@
+signals:
+  engine_speed: EngineSpeed
+  vehicule_speed: VehiculeSpeed
+  current_gear: CurrentGear
+  target_gear: TargetGear
+  throttle_position: ThrottlePosition
+  engine_torque: EngineTorque
+  transmission_input_speed: TransmissionInputSpeed
+  transmission_output_speed: TransmissionOutputSpeed
