@@ -1,6 +1,6 @@
 signals:
   engine_speed: EngineSpeed
-  vehicule_speed: VehiculeSpeed
+  vehicle_speed: VehicleSpeed
   current_gear: CurrentGear
   target_gear: TargetGear
   throttle_position: ThrottlePosition
