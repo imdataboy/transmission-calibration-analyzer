@@ -1,7 +1,7 @@
 from asammdf import MDF
 
 
-mdf = MDF("demo_data/city_01.mf4")
+mdf = MDF("demo_data/city_B.mf4")
 
 
 # basic info
@@ -17,6 +17,7 @@ print(list(mdf.channels_db.keys()))
 speed = mdf.get("VehicleSpeed")
 rpm = mdf.get("EngineSpeed")
 gear = mdf.get("CurrentGear")
+target_gear = mdf.get("TargetGear")
 
 
 print("==== VehicleSpeed ====")
@@ -35,6 +36,30 @@ print(f"timestamps: {rpm.timestamps[:10]}")
 print("==== CurrentGear ====")
 print(f"samples: {gear.samples[:20]}")
 
+print("==== TargetGear ====")
+print(f"samples: {target_gear.samples[:20]}")
+
+
+throttle = mdf.get("ThrottlePosition")
+
+print("==== ThrottlePosition ====")
+print(f"unit: {throttle.unit}")
+print(f"samples: {throttle.samples[:20]}")
+
+
+torque = mdf.get("EngineTorque")
+
+print("==== EngineTorque ====")
+print(f"unit: {torque.unit}")
+print(f"samples: {torque.samples[:20]}")
+
+
+input_speed = mdf.get("TransmissionInputSpeed")
+output_speed = mdf.get("TransmissionOutputSpeed")
+
+print("==== Transmission speeds ====")
+print(f"input:  {input_speed.samples[:10]}")
+print(f"output: {output_speed.samples[:10]}")
 
 print("==== gear changes ====")
 previous_gear = gear.samples[0]
@@ -47,3 +72,18 @@ for t,g in zip(gear.timestamps, gear.samples):
         )
 
     previous_gear = g
+
+
+print("==== Target vs Current Gear ====")
+
+for timestamp, target, current in zip(
+    gear.timestamps,
+    target_gear.samples,
+    gear.samples
+):
+    if target != current:
+        print(
+            f"{timestamp:.1f}s | "
+            f"TargetGear={target} | "
+            f"CurrentGear={current}"
+        )
