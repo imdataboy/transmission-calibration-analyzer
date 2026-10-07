@@ -10,3 +10,5 @@ demo_data/
 dist/
 build/
 *.spec
+
+map.txt
