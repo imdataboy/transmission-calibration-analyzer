@@ -1,5 +1,7 @@
 from transmission_analyzer.analysis.shift_detector import ShiftDetector
 from transmission_analyzer.data.mf4_reader import MF4Reader
+from transmission_analyzer.models.shift_event import ShiftEvent
+
 
 FILE_PATH = "demo_data/campaign_001/calibration_A/city_01.mf4"
 
@@ -18,12 +20,14 @@ def test_detect_shift():
     detector = ShiftDetector()
     shifts= detector.detect(signal)
 
-    assert shifts == [{
-        "time": 0.3,
-        "from_gear": 1,
-        "to_gear": 2,
-        "shift_type": "upshift"
-    }]
+    assert shifts == [
+        ShiftEvent(
+            time=0.3,
+            from_gear=1,
+            to_gear=2,
+            shift_type="upshift"
+        )
+    ]
 
 
 def test_detect_multiple_shifts():
@@ -36,25 +40,24 @@ def test_detect_multiple_shifts():
     shifts = detector.detect(signal)
 
     assert shifts == [
-        {
-            "time":0.2,
-            "from_gear": 1,
-            "to_gear":2,
-            "shift_type": "upshift"
-        },
-
-        {
-            "time": 0.4,
-            "from_gear": 2,
-            "to_gear": 3,
-            "shift_type": "upshift"
-        },
-        {
-            "time": 0.6,
-            "from_gear": 3,
-            "to_gear": 2,
-            "shift_type": "downshift"
-        }
+        ShiftEvent(
+            time=0.2,
+            from_gear=1,
+            to_gear=2,
+            shift_type="upshift"
+        ),
+        ShiftEvent(
+            time=0.4,
+            from_gear=2,
+            to_gear=3,
+            shift_type="upshift"
+        ),
+        ShiftEvent(
+            time=0.6,
+            from_gear=3,
+            to_gear=2,
+            shift_type="downshift"
+        )
     ]
 
 
@@ -93,10 +96,10 @@ def test_detect_skip_shift():
     shifts = detector.detect(signal)
 
     assert shifts == [
-        {
-            "time": 0.2,
-            "from_gear": 1,
-            "to_gear": 3,
-            "shift_type": "upshift"
-        }
+        ShiftEvent(
+            time=0.2,
+            from_gear=1,
+            to_gear=3,
+            shift_type="upshift"
+        )
     ]

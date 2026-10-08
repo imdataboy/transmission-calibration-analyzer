@@ -1,3 +1,5 @@
+from transmission_analyzer.models.shift_event import ShiftEvent
+
 class ShiftDetector:
     def detect(self, gear_signal):
         shifts = []
@@ -12,11 +14,13 @@ class ShiftDetector:
                 else:
                     shift_type = "downshift"
 
-                shifts.append({
-                    "time": gear_signal.timestamps[i],
-                    "from_gear": int(previous_gear),
-                    "to_gear": int(current_gear),
-                    "shift_type": shift_type
-                })
+                shifts.append(
+                    ShiftEvent(
+                        time=float(gear_signal.timestamps[i]),
+                        from_gear=int(previous_gear),
+                        to_gear=int(current_gear),
+                        shift_type=shift_type
+                    )
+                )
 
         return shifts
