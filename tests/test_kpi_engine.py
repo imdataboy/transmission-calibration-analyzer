@@ -167,6 +167,7 @@ def test_analyze_shift():
         "from_gear": 2,
         "to_gear": 3,
         "shift_type": "upshift",
+        "is_skip_shift": False,
         "vehicle_speed": 40.0,
         "engine_speed": 2200.0,
         "throttle_position": 45.0,
@@ -214,6 +215,7 @@ def test_analyze_shift_from_mf4():
     assert analysis["throttle_position"] == 48.0
     assert analysis["engine_torque"] == 192.0
     assert analysis["rpm_change"] == -194.0
+    assert analysis["is_skip_shift"] is False
 
 
 def test_analyze_all_shift_events():

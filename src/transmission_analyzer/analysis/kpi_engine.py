@@ -62,6 +62,7 @@ class KPIEngine:
             "from_gear": shift_event.from_gear,
             "to_gear": shift_event.to_gear,
             "shift_type": shift_event.shift_type,
+            "is_skip_shift": shift_event.is_skip_shift,
             "vehicle_speed": float(self.vehicle_speed_at_shift(vehicle_speed_signal, shift_event)),
             "engine_speed": float(self.engine_speed_at_shift(engine_speed_signal, shift_event)),
             "throttle_position": float(self.throttle_at_shift(throttle_signal, shift_event)),
