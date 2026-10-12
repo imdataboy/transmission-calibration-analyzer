@@ -27,6 +27,15 @@ class CalibrationComparator:
 
     def summarize(self, results):
 
+        if not results:
+            return {
+                "average_time_difference": None,
+                "average_speed_difference": None,
+                "earlier_shifts": 0,
+                "later_shifts": 0,
+                "same_time_shifts": 0
+            }
+
         average_time_difference = (
             sum(result["time_difference"] for result in results)
             / len(results)
