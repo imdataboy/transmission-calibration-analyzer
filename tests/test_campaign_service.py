@@ -50,3 +50,20 @@ def test_compare_campaigns():
     for filename, comparison in results.items():
         print("\n", filename)
         print(comparison["report"])
+
+
+def test_compare_against_baseline():
+
+    service = CampaignService()
+
+    result = service.compare_against_baseline(
+        "demo_data/campaign_001/calibration_A",
+        {
+            "calibration_B":
+            "demo_data/campaign_001/calibration_B"
+        }
+    )
+
+    assert "baseline" in result
+    assert "comparisons" in result
+    assert "calibration_B" in result["comparisons"]

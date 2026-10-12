@@ -126,3 +126,22 @@ class CampaignService:
             results[filename] = comparison
 
         return results
+
+    
+    def compare_against_baseline(self, baseline_dir, candidate_dirs):
+
+        results = {}
+
+        for candidate_name, candidate_dir in candidate_dirs.items():
+
+            comparison = self.compare_campaigns(
+                baseline_dir,
+                candidate_dir
+            )
+
+            results[candidate_name] = comparison
+
+        return {
+            "baseline": str(baseline_dir),
+            "comparisons": results
+        }
